@@ -204,9 +204,9 @@ def show_customer():
     Render the contact template on the /felicia route
     """
 
-    customer = Customer.query.all()
+    customers = Customer.query.all()
 
-    return render_template('secured/show_customer.html', title=str(title.name + ' - ' + page.name), customer=customer)
+    return render_template('secured/show_customer.html', title=str(title.name + ' - ' + page.name), customers=customers)
 
 
 # dynamic News display
