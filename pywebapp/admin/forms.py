@@ -12,7 +12,7 @@ class DepartmentForm(FlaskForm):
     """
     name = StringField('Name', validators=[DataRequired()])
     description = StringField('Adresse', validators=[DataRequired()])
-    submit = SubmitField('Standort hinzufgen')
+    submit = SubmitField('Standort hinzufügen')
 
 
 class RoleForm(FlaskForm):
@@ -32,4 +32,4 @@ class EmployeeAssignForm(FlaskForm):
                                   get_label="name")
     role = QuerySelectField(query_factory=lambda: Role.query.all(),
                             get_label="name")
-    submit = SubmitField('Zuweisen')
+    submit = SubmitField('Rechte zuweisen')
