@@ -23,4 +23,4 @@ How to use it:
 - you need also to define the database connection for example:
 - MySQL -> SQLALCHEMY_DATABASE_URI = 'mysql://db_user:user_pass@localhost/db_name'
 - SQLite -> SQLALCHEMY_DATABASE_URI = 'sqlite:////absolute/path/to/db_name.db'
-- MongoDB -> SQLALCHEMY_DATABASE_URI = 'postgresql://db_user:user_pass@localhost/db_name'
+- PostgreSQL -> SQLALCHEMY_DATABASE_URI = 'postgresql://db_user:user_pass@localhost/db_name'
