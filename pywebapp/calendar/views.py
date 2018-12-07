@@ -7,7 +7,7 @@ from . import dates
 from .forms import NewDateForm
 from .. import db
 from ..globals import REV_NUM
-from ..models import DatesTable
+from ..models import DatesTable, Employee, Customer
 
 # if 0 -> no maintenance else maintenance
 maintenance = 0
@@ -42,6 +42,7 @@ def create_new_date():
     Render the new_date template on the /new_date route
     Add an New Date to the database through the new_date form
     """
+
     form = NewDateForm()
     if form.validate_on_submit():
         new_date_plan = DatesTable(
@@ -65,4 +66,4 @@ def create_new_date():
 
         flash('Termin ungültig! Bitte wähle ein aderes Datum oder einen anderen Zeitrahmen!')
 
-    return render_template('secured/new_date.html', title=str(title.name + ' - ' + page.name) , form=form)
+    return render_template('secured/new_date.html', title=str(title.name + ' - ' + page.name), form=form)

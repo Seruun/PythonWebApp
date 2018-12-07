@@ -7,7 +7,7 @@ from . import home
 from .forms import NewCustomerForm
 from .. import db
 from ..globals import REV_NUM
-from ..models import Customer
+from ..models import Customer, Employee
 
 # if 0 -> no maintenance else maintenance
 maintenance = 0
@@ -140,7 +140,10 @@ def show_user():
     """
     Render the contact template on the /felicia route
     """
-    return render_template('secured/show_user.html', title=str(title.name + ' - ' + page.name))
+
+    employee = Employee.query.all()
+
+    return render_template('secured/show_user.html', title=str(title.name + ' - ' + page.name), employee=employee)
 
 
 @home.route('/settings')
@@ -200,7 +203,10 @@ def show_customer():
     """
     Render the contact template on the /felicia route
     """
-    return render_template('secured/show_customer.html', title=str(title.name + ' - ' + page.name))
+
+    customer = Customer.query.all()
+
+    return render_template('secured/show_customer.html', title=str(title.name + ' - ' + page.name), customer=customer)
 
 
 # dynamic News display
