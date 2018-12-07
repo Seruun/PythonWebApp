@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <li>
+        <p><a href="{{ url_for('auth.register') }}">Neuen Nutzer anlegen.</a></p>
+    </li>
+    <li>
+        <p><a href="{{ url_for('home.show_user') }}">Mitarbeiterliste anzeigen</a></p>
+    </li>
+    <li>
+        <p><a href="{{ url_for('auth.password_reset') }}">Password zurücksetzen</a></p>
+    </li>
+    <li>
+        <p><a href="{{ url_for('home.new_customer') }}">Kunden anlegen</a></p>
+    </li>
+    <li>
+        <p><a href="{{ url_for('home.show_customer') }}">Kundenliste anzeigen</a></p>
+    </li>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.form_date.label }} <br> {{ form.form_date(class='datepicker') }}
+            <br> Format Tag.Monat.Jahr -> z.Bsp. : 21.09.2018
+            {% for error in form.form_date.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <h4>Kunde</h4>
+        <p>
+            {{ form.form_customer_id.label }} <br> {{ form.form_customer_id }}
+            {% for error in form.form_customer_id.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.form_customer_first_name.label }} <br> {{ form.form_customer_first_name(size=32) }}
+            {% for error in form.form_customer_first_name.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.form_customer_last_name.label }} <br> {{ form.form_customer_last_name(size=32) }}
+            {% for error in form.form_customer_last_name.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <h4>Mitarbeiter</h4>
+        <p>
+            {{ form.form_employee_id.label }} <br> {{ form.form_employee_id }}
+            {% for error in form.form_employee_id.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.form_employee_first_name.label }} <br> {{ form.form_employee_first_name(size=32) }}
+            {% for error in form.form_employee_first_name.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.form_employee_last_name.label }} <br> {{ form.form_employee_last_name(size=32) }}
+            {% for error in form.form_employee_last_name.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>
+            {{ form.room_id.label }} <br> {{ form.room_id(size=32) }}
+            {% for error in form.room_id.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>
+            {{ form.start_time.label }} <br> {{ form.start_time(size=32) }}
+            {% for error in form.start_time.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>
+            {{ form.duration.label }} <br> {{ form.duration(size=32) }}
+            {% for error in form.duration.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+{% endblock %}

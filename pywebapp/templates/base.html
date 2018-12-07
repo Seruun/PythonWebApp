@@ -1,0 +1,20 @@
+{% if template == 'index.html' %}
+    {% include "includes/index_entrance.html" %}
+{% elif template == ['404.html', '405.html', '500.html'] %}
+    {% include "includes/header.html" %}
+    {% include "includes/nav_bar_left.html" %}
+{% else %}
+    {% include "includes/header.html" %}
+    {% include "includes/nav_bar_left.html" %}
+{% endif %}
+
+<div class="container" id="main">
+    <div class="row">
+        <div class="wrapper col-md-12">
+            {% block content %}
+            {% endblock %}
+      	    <div class="push"></div>
+        </div>
+    </div>
+</div>
+{% include "includes/footer.html" %}

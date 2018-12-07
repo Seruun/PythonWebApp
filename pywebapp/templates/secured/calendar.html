@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        table, th, td {
+            border: 1px solid lightgrey;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            width: 100%;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+    <!-- @ToDo DatePicker ... Default Today-->
+    <label for="date_picker">Datum: </label>
+    <input id="date_picker" type="date" value="{{ now.strftime('%Y-%m-%d') }}"/>
+
+    <!-- @ToDo Calender Display -->
+    <table>
+        <thead>
+        <tr> <!-- <tr></tr> = ist die Definition einer Zeile in einer Tabelle -->
+            <th>Uhrzeit</th> <!-- <th></th> = ist die Definition einer Header(Überschrift)-Zelle -->
+            <th>Raum 1</th>
+            <th>Raum 2</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if dates == date %}
+            {% for tdates in termin_dates %}
+                {% for time in time.time_list_id %}
+                    {% if tdates.start_time <= tdates.time <= tdates.end_time and tdates.room_id == 1 %}
+                        <tr id={{ tdates.time }}>
+                            <th scope="row">{{ tdates.time }}</th>
+                            <td style="background-color: {{ tdates.employee_color }}"> {{ tdates.room_1 }} </td>
+                            <td> {{ tdates.room_2 }} </td>
+                        </tr>
+                    {% elif tdates.start_time <= tdates.time <= tdates.end_time and tdates.room_id == 2 %}
+                        <tr id={{ tdates.time }}>
+                            <th scope="row">{{ tdates.time }}</th>
+                            <td> {{ tdates.room_1 }} </td>
+                            <td style="background-color: {{ tdates.employee_color }}"> {{ tdates.room_2 }} </td>
+                        </tr>
+                    {% else %}
+                        <tr id={{ time.time }}>
+                            <th scope="row">{{ time.time }}</th>
+                            <td> {{ tdates.room_1 }} </td>
+                            <td> {{ tdates.room_2 }} </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+    <br><br>
+    <button><a href="{{ url_for('dates.create_new_date') }}">Neuer Termin</a></button>
+    <input id="refresh" type="button" value="Kalender aktualisieren" onclick="reload()">
+
+{% endblock %}

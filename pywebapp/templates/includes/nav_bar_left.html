@@ -1,0 +1,126 @@
+<div class="nav-side-menu">
+    <div class="brand"><a href="{{ url_for('home.index') }}">Felicia Tattoo Art UG</a></div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li>
+                <a href={{ url_for('home.homepage') }}>
+                    <i class="fa fa-dashboard fa-lg"></i> Homepage
+                </a>
+            </li>
+            <li data-toggle="collapse" data-target="#studio" class="collapsed active">
+                <a href="#"><i class="fa fa-gift fa-lg"></i> Studio <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="studio">
+                <li class="active"><a href="#">Studio</a></li>
+                <li><a href="#">Historie</a></li>
+                <li><a href="{{ url_for('home.gallery') }}">Gallerie</a></li>
+            </ul>
+
+            <li data-toggle="collapse" data-target="#staff" class="collapsed">
+                <a href="#"><i class="fa fa-globe fa-lg"></i> Das Team <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="staff">
+                <li><a href="{{ url_for('home.frank') }}">Frank Kemnitz</a></li>
+                <li><a href="{{ url_for('home.felicia') }}">Felicia => Nicole Kemnitz</a></li>
+            </ul>
+
+
+            <li data-toggle="collapse" data-target="#style" class="collapsed">
+                <a href="#"><i class="fa fa-car fa-lg"></i> Tattoo Art Styles <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="style">
+                <li><a href="{{ url_for('home.cover_up') }}">Cover Up's</a></li>
+                <li><a href="{{ url_for('home.bio_realistic') }}">Bio Realismus</a></li>
+                <li><a href="{{ url_for('home.steampunk') }}">Steampunk</a></li>
+                <li><a href="{{ url_for('home.care_instructions') }}">Pflegehinweise</a></li>
+            </ul>
+            <li data-toggle="collapse" data-target="#news" class="collapsed">
+                <a href="#"><i class="fa fa-car fa-lg"></i> Neuigkeiten <span class="arrow"></span></a>
+            </li>
+            <!-- News immer Datum der veröffentlichung posten ... bitte max. 10 News ansonsten wirkt es überladen!!! -->
+            <!-- bitte keinen index (news_index_1) namen doppelt verwenden oder überschreiben!!! -->
+            <ul class="sub-menu collapse" id="news">
+                <li><a id="0" href="{{ url_for('home.news_index') }}0">News vom 08.07.2007</a></li>
+                <li><a id="1" href="{{ url_for('home.news_index') }}1">News vom 10.10.2010</a></li>
+                <li><a id="2" href="{{ url_for('home.news_index') }}2">News vom 15.11.2015</a></li>
+                <!--
+                <li><a id="3" href="{{ url_for('home.news_index') }}3">News vom 21.04.2018</a></li>
+                <li><a id="4" href="{{ url_for('home.news_index') }}4">News vom 13.09.2018</a></li>
+                <li><a id="5" href="{{ url_for('home.news_index') }}5">News vom 21.09.2018</a></li>
+                <li><a id="6" href="{{ url_for('home.news_index') }}6">News vom 15.10.2018</a></li>
+                <li><a id="7" href="{{ url_for('home.news_index') }}7">News vom 17.10.2018</a></li>
+                <li><a id="8" href="{{ url_for('home.news_index') }}8">News vom 23.10.2018</a></li>
+                <li><a id="9" href="{{ url_for('home.news_index') }}9">News vom 27.10.2018</a></li>
+                -->
+            </ul>
+            <li>
+                <a href="#">
+                    <i class="fa fa-user fa-lg"></i> Wir sind hier zu finden:
+                </a>
+            </li>
+            <li>
+                <a href="https://de-de.facebook.com/pages/category/Tattoo---Piercing-Shop/Felicia-Tattoo-Art-UG-haftungsbeschr%C3%A4nkt-220750944608623/">
+                    <i class="fa fa-user fa-lg"></i> Facebook
+                </a>
+            </li>
+            <li>
+                <a href="#UnderConstruction">
+                    <i class="fa fa-user fa-lg"></i> Twitter
+                </a>
+            </li>
+            <li> <!-- aktuell Link nicht verfügbar!!! Felicia auch nicht in der Studio Liste dort zu finden!!!-->
+                <a href="http://www.tattoo-spirit.de/subsystems/microsite/microsite.php?ms_id=65">
+                    <i class="fa fa-user fa-lg"></i> Tattoo Spirit
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jappy.de/user/FeliciaTattoo">
+                    <i class="fa fa-user fa-lg"></i> Jappy
+                </a>
+            </li>
+            <li>
+                <a href="#UnderConstruction">
+                    <i class="fa fa-user fa-lg"></i> Instagram
+                </a>
+            </li>
+            {% if current_user.is_anonymous %}
+                {% include 'includes/nav_login.html' %}
+            {% else %}
+                {% if current_user.role_id == 4 %}
+                    {% include 'includes/nav_logout_usr_gr3.html' %}
+                {% elif current_user.role_id == 3 %}
+                    {% include 'includes/nav_logout_usr_gr3.html' %}
+                {% elif current_user.role_id == 2 %}
+                    {% include 'includes/nav_logout_usr_gr2.html' %}
+                {% elif current_user.role_id == 1 %}
+                    {% include 'includes/nav_logout_usr_gr1.html' %}
+                {% endif %}
+            {% endif %}
+            <li>
+                <a href={{ url_for('home.contact') }}>
+                    <i class="fa fa-users fa-lg">Kontakt</i>
+                </a>
+            </li>
+            <li>
+                Angemeldeter Nutzer:
+                {% if current_user.first_name == None %}
+                    {{ current_user.username }}
+                {% else %}
+                    {{ current_user.first_name }}
+                {% endif %}
+                <br>
+                Benutzerrolle:
+                {% if current_user.role_id == 4 %}
+                    Serveradmin
+                {% elif current_user.role_id == 3 %}
+                    Admin
+                {% elif current_user.role_id == 2 %}
+                    Teamleader
+                {% elif current_user.role_id == 1 %}
+                    Mitarbeiter
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>

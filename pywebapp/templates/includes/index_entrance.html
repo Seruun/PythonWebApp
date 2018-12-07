@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- @ToDo Priority Level Definition from 1 = high to 6 = low -->
+<html lang="en">
+<head>
+    <!-- Metadata -->
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Titel -->
+    <title>{{ title }}</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <!-- CSS -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+    <!-- Bootstrap JS Core -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            border: 0;
+            overflow: hidden; /*  Disable scrollbars */
+            display: block; /* No floating content on sides */
+        }
+    </style>
+</head>
+<body>
+
+
+{% if maintenace == 1 %}
+    <p>Under Maintenance</p>
+{% else %}
+    <a href="{{ url_for('home.homepage') }}">
+        <canvas id="landingpage" style="height: 95%; width: 99%; border:solid 1px #000000;"></canvas>
+        <script>
+            (function () {
+                var
+                    // Obtain a reference to the canvas element
+                    // using its id.
+                    htmlCanvas = document.getElementById('landingpage'),
+
+                    // Obtain a graphics context on the
+                    // canvas element for drawing.
+                    context = htmlCanvas.getContext('2d'),
+
+                    // Obtain picture from defined folder
+                    imageObj = new Image();
+
+                imageObj.src = "{{ url_for('static', filename='img/landingpage_img.jpg') }}";
+
+                // Start listening to resize events and
+                // draw canvas.
+                initialize();
+
+                document.getElementById("main").innerText =
+                    "clientHeight: " + landingpage.clientHeight + ", clientWidth: " + landingpage.clientWidth + "\r"
+                    + "offsetHeight: " + landingpage.offsetHeight + ", offsetWidth: " + landingpage.offsetWidth + "\r"
+                    + "scrollHeight: " + landingpage.scrollHeight + ", scrollWidth: " + landingpage.scrollWidth;
+
+                function initialize() {
+                    // Register an event listener to
+                    // call the resizeCanvas() function each time
+                    // the window is resized.
+                    window.addEventListener('resize', resizeCanvas, false);
+
+                    // Draw canvas border for the first time.
+                    resizeCanvas();
+                }
+
+                // Display custom canvas.
+                // In this case it's a blue, 5 pixel border that
+                // resizes along with the browser window.
+                function redraw() {
+                    context.drawImage(imageObj, 0, 0, window.innerWidth, window.innerHeight);
+
+                }
+
+                // Runs each time the DOM window resize event fires.
+                // Resets the canvas dimensions to match window,
+                // then draws the new borders accordingly.
+                function resizeCanvas() {
+                    htmlCanvas.width = window.innerWidth;
+                    htmlCanvas.height = window.innerHeight;
+                    redraw();
+                }
+
+
+            })();
+        </script>
+    </a>
+    <!-- direct page refresh -> weil Bild sonst nicht gelaen wurde beim ersten betreten der Seite -->
+    <script>
+        window.onload = function () {
+            if (!window.location.hash) {
+                window.location = window.location + '#r';
+                window.location.reload();
+            }
+        }
+    </script>
+{% endif %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3 class="text-center">Pflegehinweise nach dem Tätowieren!</h3><br>
+    <div class="row">
+        <div class="col-16">
+            <p>
+                - Entfernen Sie vorsichtig mit ihren sauberen Händen die Folie nach ca. 1 Stunde.
+                Danach empfiehlt es sich die nächstens 2 Tage den Folienverband regelmäßig alle 3-4 Stunden zu wechseln.
+                Nachts kann dieser auch länger auf der Haut bleiben.
+                Danach ist Luft und eine Tattoocreme die beste Pflegelösung für eine gute Abheilung.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-14">
+            <img src="{{ url_for('static', filename='img/info/hautbild.jpg') }}" class="img-fluid"
+                 alt="Responsive image">
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-16">
+            <br><br>
+            <h6 class="text-center">Verbandswechsel:</h6>
+            <ul>
+                <li>
+                    tupfen Sie Ihre Wunden mit einem sauberen, feuchten Zewatuch ab und entfernen somit die Cremereste
+                    und
+                    Wundsekrete.
+                    Alternativ ist auch die Reinigung mit einem <a
+                        href="https://www.amazon.de/OCTENISEPT-Loesung-50-Wunddesinfektion-Desinfektion/dp/B003A7EM3G/ref=sr_1_1?ie=UTF8&qid=1542795056&sr=8-1&keywords=Octenisept+Spray%27s">Octenisept
+                    Spray's</a> vorteilhaft.
+                </li>
+                <li>
+                    im Sommer ist diese Reinigung sogar notwendig! (Das Spray ist in jeder Apotheke erhältlich!)
+                </li>
+                <li>
+                    danach lassen Sie ihrer Haut eine kurze Trockenphase von ca. 1 Minute und cremen anschließend ihr
+                    Tattoo
+                    dünn mit einer Wund- und Heilcreme ein,
+                    empfohlen wird hier die <a
+                        href="https://www.amazon.de/TattooMed-After-Tattoo-Tattoo-Pflege-T%C3%A4towierte/dp/B00AQYSLHY/ref=sr_1_2?ie=UTF8&qid=1542794749&sr=8-2&keywords=tattoo+med+creme">TattooMed
+                    Creme After Tattoo</a>, diese ist auch in ihrer Apotheke erhältlich.
+                </li>
+                <li>
+                    in den folgenden 5 Tagen salben Sie täglich 5x ihr Tattoo sauber und dünn ein und die darauf
+                    folgenden 5 Tage 3-4x täglich.
+                </li>
+                <li>
+                    weichen Sie es nicht mit Wasser ein, wie z.Bsp. baden oder sehr langes/ausgiebiges Duschen!
+                    Andernfalls löst sich nach einer Weile der Wundschutz (Grind), die Wunde öffnet sich und dann
+                    besteht eine erhöhte Infektionsgefahr sowie der Farbabstoß aus der Haut.
+                </li>
+                <li>
+                    nicht kratzen
+                </li>
+                <li>
+                    kein Sport extreme Bewegungen
+                </li>
+                <li>
+                    kein Staub, Schmutz oder ähnliches an das frische Tattoo lassen
+                </li>
+                <li>
+                    in den nächsten 8 Wochen dürfen Sie kein Solarium besuchen oder sich in die Sonne legen, da sonst
+                    der Abheilungsprozess unnötig verzögert wird und Farbpigmente verblassen.
+                    Im Sommer benutzen Sie bitte eine Tattooheilcreme mit Sunblocker und nach der Abheilung (ca. 10-14
+                    Tage) auf dem Tattoo weiterhin normalen Sunblocker.
+                    Auch hier empfehlen wir <a
+                        href="https://www.amazon.de/TattooMed-Sun-Protection-LSF50-Sonnenschutz/dp/B0127BJS0W/ref=sr_1_1_sspa?ie=UTF8&qid=1542796788&sr=8-1-spons&keywords=tattoomed+sun+protection&psc=1">TattooMed
+                    Sun Protection LSF50</a>. Die endgültige Abheilung ist erst nach etwa 4 Monaten abgeschlossen. Erst
+                    dann sind die Farbpigmente 100%ig in den Hautzellen eingelagert.
+                </li>
+                <li>
+                    nehmen Sie keine Drogen oder hochdosierte Tabletten während der Heilung ein. Diese verzögern den
+                    Heilungsprozess ebenfalls erheblich.
+                </li>
+                <li>
+                    bedenken Sie bitte immer: so wie Sie ihr Tattoo pflegen, so schön bleibt es auch nach dem
+                    tätowieren!<br>
+                </li>
+                <h6 class="text-center">Darüber freuen Sie sich selbst und Wir uns natürlich dann auch.</h6>
+                <br>
+                <p style="color: red">
+                    <b>
+                        Disclaimer: <br>
+                        Wir geben keine Garantie auf den 100% Farbverbleib in der Haut oder
+                        entzündungsfreie Hautstellen, wenn Sie ihr Tattoo nicht nach Anweisung pflegen!<br>
+                        Wir sind vom Gesundheitsamt geprüft und positiv bestätigt. Bei uns werden SIe keine Hinweise auf
+                        Hygienemangel finden.
+                    </b>
+                </p>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
