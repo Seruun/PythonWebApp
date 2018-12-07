@@ -3,7 +3,7 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from Eligor_CMS import db, login_manager
+from pywebapp import db, login_manager
 
 
 class Employee(UserMixin, db.Model):

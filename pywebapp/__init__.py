@@ -35,7 +35,7 @@ def create_app(config_name):
     login_manager.login_view = "auth.login"
     migrate = Migrate(app, db)
 
-    from Eligor_CMS import models
+    from pywebapp import models
 
     # Not implemented at the moment.
     # from .admin import admin as admin_blueprint
