@@ -7,3 +7,6 @@ Active Developed at the moment.
 ### Requirements
 - Python 3.7
 - SQLite | MySQL | PostgreSQL | MongoDB (choose your preferred Database)
+
+#### Tools used for Development
+JetBrains: PyCharm Professional & WebStorm
