@@ -22,6 +22,7 @@
                 <th width="10%"> Kundennummer </th>
                 <th width="30%"> Name </th>
                 <th width="30%"> Adresse </th>
+                <th width="30%"> Telefonnummer </th>
                 <th width="15%"> Bearbeiten </th>
                 <th width="15%"> Löschen </th>
               </tr>
@@ -32,6 +33,7 @@
                 <td> {{ customer.id }} </td>
                 <td> {{ customer.full_name }} </td>
                 <td> {{ customer.address }} </td>
+                <td> {{ customer.phone_number }} </td>
                 <td>
                   <a href="{{ url_for('home.edit_customer', id=customer.id) }}">
                     <i class="fa fa-pencil"></i> Bearbeiten
