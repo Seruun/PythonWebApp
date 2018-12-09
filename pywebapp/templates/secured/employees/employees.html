@@ -1,3 +1,4 @@
+{% import "bootstrap/utils.html" as utils %}
 {% extends "base.html" %}
 
 {% block extra_css %}
@@ -5,61 +6,61 @@
 {% endblock %}
 
 {% block content %}
-<div class="content-section">
-<div class="outer">
-  <div class="middle">
-    <div class="inner">
-      <br/>
-      {{ utils.flashed_messages() }}
-      <br/>
-      <h1 style="text-align:center;">Mitarbeiter</h1>
-      {% if employees %}
-        <hr class="intro-divider">
-        <div class="center">
-          <table class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th width="10%"> Mitarbeiternummer </th>
-                <th width="30%"> Name </th>
-                <th width="30%"> Adresse </th>
-                <th width="15%"> Bearbeiten </th>
-                <th width="15%"> Löschen </th>
-              </tr>
-            </thead>
-            <tbody>
-            {% for employee in employees %}
-              <tr>
-                <td> {{ employee.id }} </td>
-                <td> {{ employee.full_name }} </td>
-                <td> {{ employee.address }} </td>
-                <td>
-                  <a href="{{ url_for('employee.edit_employee', id=employee.id) }}">
-                    <i class="fa fa-pencil"></i> Bearbeiten
-                  </a>
-                </td>
-                <td>
-                  <a href="{{ url_for('employee.delete_employee', id=employee.id) }}">
-                    <i class="fa fa-trash"></i> Löschen
-                  </a>
-                </td>
-              </tr>
-            {% endfor %}
-            </tbody>
-          </table>
+    <div class="content-section">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <br/>
+                {{ utils.flashed_messages() }}
+                <br/>
+                <h1 style="text-align:center;">Mitarbeiter</h1>
+                {% if employees %}
+                    <hr class="intro-divider">
+                    <div class="center">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="10%"> Mitarbeiternummer</th>
+                                <th width="30%"> Name</th>
+                                <th width="30%"> Adresse</th>
+                                <th width="15%"> Bearbeiten</th>
+                                <th width="15%"> Löschen</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for employee in employees %}
+                                <tr>
+                                    <td> {{ employee.id }} </td>
+                                    <td> {{ employee.full_name }} </td>
+                                    <td> {{ employee.address }} </td>
+                                    <td>
+                                        <a href="{{ url_for('employee.edit_employee', id=employee.id) }}">
+                                            <i class="fa fa-pencil"></i> Bearbeiten
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('employee.delete_employee', id=employee.id) }}">
+                                            <i class="fa fa-trash"></i> Löschen
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="text-align: center">
+                {% else %}
+                    <div style="text-align: center">
+                    <h3> Es sind noch keine Mitarbeiter erstellt worden. </h3>
+                    <hr class="intro-divider">
+                {% endif %}
+                <a href="{{ url_for('employee.add_employee') }}" class="btn btn-default btn-lg">
+                    <i class="fa fa-plus"></i>
+                    Neuen Mitarbeiter anlegen
+                </a>
+                </div>
+                </div>
+            </div>
         </div>
-        <div style="text-align: center">
-      {% else %}
-        <div style="text-align: center">
-          <h3> Es sind noch keine Mitarbeiter erstellt worden. </h3>
-          <hr class="intro-divider">
-      {% endif %}
-        <a href="{{ url_for('employee.add_employee') }}" class="btn btn-default btn-lg">
-          <i class="fa fa-plus"></i>
-          Neuen Mitarbeiter anlegen
-        </a>
-      </div>
     </div>
-  </div>
-</div>
-</div>
 {% endblock %}
