@@ -134,18 +134,6 @@ def capacity():
     return render_template('secured/capacity.html', title=str(title.name + ' - ' + page.name))
 
 
-@home.route('/show_user')
-@login_required
-def show_user():
-    """
-    Render the contact template on the /felicia route
-    """
-
-    employee = Employee.query.all()
-
-    return render_template('secured/show_user.html', title=str(title.name + ' - ' + page.name), employee=employee)
-
-
 @home.route('/settings')
 @login_required
 def settings():
@@ -170,43 +158,6 @@ def version():
     Render the contact template on the /felicia route
     """
     return render_template('version.html', title=str(title.name + ' - ' + page.name))
-
-
-@home.route('/new_customer', methods=['GET', 'POST'])
-@login_required
-def new_customer():
-    """
-    Render the contact template on the /felicia route
-    """
-    form = NewCustomerForm()
-    if form.validate_on_submit():
-        customer = Customer(
-            id=form.customer_id.data,
-            email=form.email.data,
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
-            full_name=str(form.first_name.data) + " " + str(form.last_name.data),
-            address=form.address.data,
-            phone_number=form.phone_number.data,
-
-        )
-
-        db.session.add(customer)
-        db.session.commit()
-        flash('Der Nutzer wurde erfolgreich angelegt. Das Login ist nun möglich.')
-    return render_template('secured/new_customer.html', title=str(title.name + ' - ' + page.name), form=form)
-
-
-@home.route('/show_customer')
-@login_required
-def show_customer():
-    """
-    Render the contact template on the /felicia route
-    """
-
-    customers = Customer.query.all()
-
-    return render_template('secured/show_customer.html', title=str(title.name + ' - ' + page.name), customers=customers)
 
 
 # dynamic News display

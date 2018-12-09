@@ -26,32 +26,6 @@ def revision():
     return {'rev_version': REV_NUM}
 
 
-@auth.route('/register', methods=['GET', 'POST'])
-def register():
-    """
-    Handle requests to the /register route
-    Add an Employee to the database through the registration form
-    """
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        employee = Employee(
-            email=form.email.data,
-            username=form.username.data,
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
-            full_name=str(form.first_name.data) + " " + str(form.last_name.data),
-            password=form.password.data,
-            role_id=form.role_id.data
-
-        )
-
-        db.session.add(employee)
-        db.session.commit()
-        flash('Der Nutzer wurde erfolgreich angelegt. Das Login ist nun möglich.')
-
-    return render_template('secured/register.html', title=str(title.name + ' - ' + page.name), form=form)
-
-
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     """
