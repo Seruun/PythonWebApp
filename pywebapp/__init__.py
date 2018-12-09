@@ -23,6 +23,12 @@ def create_app(config_name):
             SECRET_KEY=os.getenv('SECRET_KEY'),
             SQLALCHEMY_DATABASE_URI=os.getenv('SQLALCHEMY_DATABASE_URI')
         )
+    elif os.getenv('FLASK_CONFIG') == "testing":
+        app = Flask(__name__)
+        app.config.update(
+            SECRET_KEY=os.getenv('SECRET_KEY'),
+            SQLALCHEMY_DATABASE_URI=os.getenv('SQLALCHEMY_DATABASE_URI')
+        )
     else:
         app = Flask(__name__, instance_relative_config=True)
         app.config.from_object(app_config['development'])

@@ -92,3 +92,22 @@ def edit_employee(id):
     return render_template('secured/employees/employee.html', title=str(title_name + ' - ' + Title), action="Edit",
                            add_employee=add_employee, form=form,
                            customer=_employee)
+
+
+@employee.route('/employees/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_employee(id):
+    """
+    Delete a Employee from the database
+    """
+    Title = "Mitarbeiter löschen"
+
+    _employee = Employee.query.get_or_404(id)
+    db.session.delete(_employee)
+    db.session.commit()
+    flash('Mitarbeiter erfolgreich gelöscht.')
+
+    # redirect to the departments page
+    return redirect(url_for('employee.list_employees'))
+
+    return render_template(title=str(title_name + ' - ' + Title))
