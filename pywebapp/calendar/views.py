@@ -6,24 +6,8 @@ from flask_login import login_required
 from . import dates
 from .forms import NewDateForm
 from .. import db
-from ..globals import REV_NUM
+from ..globals import title_name
 from ..models import DatesTable, Employee, Customer
-
-# if 0 -> no maintenance else maintenance
-maintenance = 0
-
-
-@dates.context_processor
-def inject_now():
-    """
-    Footer Copyright Year Getter
-    """
-    return {'now': datetime.utcnow()}
-
-
-@dates.context_processor
-def revision():
-    return {'rev_version': REV_NUM}
 
 
 @dates.route('/calendar')
@@ -32,7 +16,9 @@ def calendar():
     """
     Render the contact template on the /felicia route
     """
-    return render_template('secured/calendar.html', title=str(title.name + ' - ' + page.name))
+    Title = "Kalendar"
+
+    return render_template('secured/calendar.html', title=str(title_name + ' - ' + Title))
 
 
 @dates.route('/calendar/new_date', methods=['GET', 'POST'])
@@ -42,6 +28,8 @@ def create_new_date():
     Render the new_date template on the /new_date route
     Add an New Date to the database through the new_date form
     """
+
+    Title = "Termin erstellen"
 
     form = NewDateForm()
     if form.validate_on_submit():
@@ -66,4 +54,4 @@ def create_new_date():
 
         flash('Termin ungültig! Bitte wähle ein aderes Datum oder einen anderen Zeitrahmen!')
 
-    return render_template('secured/new_date.html', title=str(title.name + ' - ' + page.name), form=form)
+    return render_template('secured/new_date.html', title=str(title_name + ' - ' + Title), form=form)

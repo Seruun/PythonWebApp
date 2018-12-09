@@ -19,7 +19,7 @@ def list_customers():
 
     customers = Customer.query.all()
 
-    return render_template('secured/customers/customers.html', title=str(title_name + ' - ' + Title), customer=customers)
+    return render_template('secured/customers/customers.html', title=str(title_name + ' - ' + Title), customers=customers)
 
 
 @customer.route('/customers/add', methods=['GET', 'POST'])
@@ -36,7 +36,7 @@ def add_customer():
 
     if form.validate_on_submit():
         _customer = Customer(
-            id=form.customer_id.data,
+            id=form.id.data,
             email=form.email.data,
             first_name=form.first_name.data,
             last_name=form.last_name.data,
@@ -71,7 +71,7 @@ def edit_customer(id):
     _customer = Customer.query.get_or_404(id)
     form = CustomerForm(obj=_customer)
     if form.validate_on_submit():
-        _customer.id = form.customer_id.data,
+        _customer.id = form.id.data,
         _customer.email = form.email.data,
         _customer.first_name = form.first_name.data,
         _customer.last_name = form.last_name.data,
@@ -84,11 +84,10 @@ def edit_customer(id):
         # redirect to the departments page
         return redirect(url_for('customer.list_customers'))
 
-    form.customer_id.data = _customer.id
+    form.id.data = _customer.id
     form.email.data = _customer.email
     form.first_name.data = _customer.first_name
     form.last_name.data = _customer.last_name
-    form.full_name.data = _customer.full_name
     form.address.data = _customer.address
     form.phone_number.data = _customer.phone_number
     return render_template('secured/customers/customer.html', title=str(title_name + ' - ' + Title), action="Edit",

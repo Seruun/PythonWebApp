@@ -31,8 +31,9 @@
                             {% for employee in employees %}
                                 <tr>
                                     <td> {{ employee.id }} </td>
-                                    <td> {{ employee.full_name }} </td>
-                                    <td> {{ employee.address }} </td>
+                                    <td> {{ employee.first_name }} </td>
+                                    <td> {{ employee.lasst_name }} </td>
+                                    <td> {{ employee.email }} </td>
                                     <td>
                                         <a href="{{ url_for('employee.edit_employee', id=employee.id) }}">
                                             <i class="fa fa-pencil"></i> Bearbeiten

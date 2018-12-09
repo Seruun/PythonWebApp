@@ -25,7 +25,7 @@ def list_employees():
 
     employees = Employee.query.all()
 
-    return render_template('secured/employees/employees.html', title=str(title_name + ' - ' + Title), employee=employees)
+    return render_template('secured/employees/employees.html', title=str(title_name + ' - ' + Title), employees=employees)
 
 
 @employee.route('/employees/add', methods=['GET', 'POST'])
@@ -87,11 +87,9 @@ def edit_employee(id):
     form.email.data = _employee.email
     form.first_name.data = _employee.first_name
     form.last_name.data = _employee.last_name
-    form.full_name.data = _employee.full_name
-    form.phone_number.data = _employee.phone_number
     return render_template('secured/employees/employee.html', title=str(title_name + ' - ' + Title), action="Edit",
                            add_employee=add_employee, form=form,
-                           customer=_employee)
+                           employee=_employee)
 
 
 @employee.route('/employees/delete/<int:id>', methods=['GET', 'POST'])

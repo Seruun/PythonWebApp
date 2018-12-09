@@ -21,7 +21,8 @@
                             <thead>
                             <tr>
                                 <th width="10%"> Kundennummer</th>
-                                <th width="30%"> Name</th>
+                                <th width="30%"> Vorname</th>
+                                <th width="30%"> Nachname</th>
                                 <th width="30%"> Adresse</th>
                                 <th width="30%"> Telefonnummer</th>
                                 <th width="15%"> Bearbeiten</th>
@@ -32,7 +33,8 @@
                             {% for customer in customers %}
                                 <tr>
                                     <td> {{ customer.id }} </td>
-                                    <td> {{ customer.full_name }} </td>
+                                    <td> {{ customer.first_name }} </td>
+                                    <td> {{ customer.last_name }} </td>
                                     <td> {{ customer.address }} </td>
                                     <td> {{ customer.phone_number }} </td>
                                     <td>
