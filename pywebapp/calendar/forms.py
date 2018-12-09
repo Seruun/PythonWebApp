@@ -1,8 +1,10 @@
 from datetime import time
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, ValidationError, DateField, QuerySelectField
+from wtforms import StringField, SubmitField, ValidationError, DateField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired
+
 from wtforms_components import TimeField, DateRange
 
 from ..models import Customer, DatesTable, TimeTable, CalendarTable, Employee

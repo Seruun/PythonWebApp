@@ -7,7 +7,7 @@ from . import auth
 from .forms import LoginForm, PasswordUpdateForm
 from .. import db
 from ..models import Employee
-from ..globals import PageName
+from ..globals import title_name
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -16,7 +16,7 @@ def login():
     Handle requests to the /login route
     Log an Employee through the login form
     """
-    title_name = "Login"
+    Title = "Login"
 
     form = LoginForm()
 
@@ -29,7 +29,7 @@ def login():
         else:
             flash('Email oder Passwort falsch!')
 
-    return render_template('secured/login.html', title=str(title_name + ' - ' + PageName), form=form)
+    return render_template('secured/login.html', title=str(title_name + ' - ' + Title), form=form)
 
 
 @auth.route('/password_reset', methods=['GET', 'POST'])
@@ -39,7 +39,7 @@ def password_reset():
     Handle requests to the /login route
     Log an Employee through the login form
     """
-    title_name = "Passwort zurücksetzen"
+    Title = "Passwort zurücksetzen"
 
     form = PasswordUpdateForm()
 
@@ -54,7 +54,7 @@ def password_reset():
             flash('Password konnte nicht zurück gesetzt werden!')
 
     return render_template('secured/password_reset.html',
-                           title=str(title_name + ' - ' + PageName), form=form)
+                           title=str(title_name + ' - ' + Title), form=form)
 
 
 @auth.route('/logout')
