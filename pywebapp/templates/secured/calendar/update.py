@@ -1,7 +1,7 @@
 import datetime
 
-from web import db
-from web.models import CalendarDates
+from .... import db
+from ....models import CalendarTable
 
 start_year = 2018
 start_month = 1
@@ -41,7 +41,7 @@ while year <= end_year:
             unf_date = datetime.datetime(year, month, day)
             date = unf_date.strftime('%d.%m.%Y')
             # print(date)
-            d = CalendarDates(date_id=date_id, date=date)
+            d = CalendarTable(id=date_id, full_date=date, description=unf_date)
             db.session.add(d)
             db.session.commit()
             day += 1

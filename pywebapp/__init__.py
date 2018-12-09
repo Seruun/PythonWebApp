@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 # local imports
 from config import app_config
 from datetime import datetime
-from .globals import REV_NUM
+from .globals import REV_NUM, title_name
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -37,15 +37,11 @@ def create_app(config_name):
 
     from pywebapp import models
 
-    # admin split into employee and customer and replaced by them
-    # from .admin import admin as admin_blueprint
-    # app.register_blueprint(admin_blueprint, url_prefix='/admin')
-
     from .employee import employee as employee_blueprint
-    app.register_blueprint(employee_blueprint, url_prefix='/admin')
+    app.register_blueprint(employee_blueprint)
 
     from .customer import customer as customer_blueprint
-    app.register_blueprint(customer_blueprint, url_prefix='/admin')
+    app.register_blueprint(customer_blueprint)
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)

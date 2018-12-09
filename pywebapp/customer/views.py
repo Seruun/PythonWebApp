@@ -91,12 +91,12 @@ def edit_customer(id):
     form.full_name.data = _customer.full_name
     form.address.data = _customer.address
     form.phone_number.data = _customer.phone_number
-    return render_template('admin/departments/department.html', title=str(title_name + ' - ' + Title), action="Edit",
+    return render_template('secured/customers/customer.html', title=str(title_name + ' - ' + Title), action="Edit",
                            add_customer=add_customer, form=form,
                            customer=_customer)
 
 
-@customer.route('/departments/delete/<int:id>', methods=['GET', 'POST'])
+@customer.route('/customers/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_customer(id):
     """
@@ -110,6 +110,6 @@ def delete_customer(id):
     flash('Kunde erfolgreich gelöscht.')
 
     # redirect to the departments page
-    return redirect(url_for('admin.list_customers'))
+    return redirect(url_for('customer.list_customers'))
 
     return render_template(title=str(title_name + ' - ' + Title))

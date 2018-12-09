@@ -7,7 +7,7 @@ Will be turned into a full functional CMS System based on Python & Flask.
 => EligorCMS
 
 ### Requirements
-- Python 3.7
+- Python 3.5
 - SQLite | MySQL | PostgreSQL (choose your preferred Database)
 
 #### Tools used for Development

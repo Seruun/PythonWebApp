@@ -1,6 +1,3 @@
-# config.py
-
-
 class Config(object):
     """
     Common configurations
@@ -41,5 +38,6 @@ app_config = {
     'development': DevelopmentConfig,
     'production': ProductionConfig,
     'testing': TestingConfig,
+    # Fallback
     'default': ProductionConfig
 }

@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Email, EqualTo
 from ..models import Employee
 
 
-class AddEmployeeForm(FlaskForm):
+class EmployeeForm(FlaskForm):
     """
     Form for new user creation
     """

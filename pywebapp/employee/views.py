@@ -2,10 +2,10 @@ from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from . import employee
-from .forms import AddEmployeeForm
+from .forms import EmployeeForm
 from .. import db
 from ..models import Employee
-from ..globals import PageName
+from ..globals import title_name
 
 
 def check_admin_role():
@@ -13,7 +13,22 @@ def check_admin_role():
         abort(403)
 
 
-@employee.route('/add_employee', methods=['GET', 'POST'])
+@employee.route('/employees')
+@login_required
+def list_employees():
+    """
+    Display all registered employees in a list
+    """
+    check_admin_role()
+
+    Title = "Mitarbeiterliste"
+
+    employees = Employee.query.all()
+
+    return render_template('secured/employees/employees.html', title=str(title_name + ' - ' + Title), employee=employees)
+
+
+@employee.route('/employees/add', methods=['GET', 'POST'])
 @login_required
 def add_employee():
     """
@@ -21,9 +36,9 @@ def add_employee():
     """
     check_admin_role()
 
-    title_name = "Mitarbeiterkonto einrichten"
+    Title = "Mitarbeiterkonto einrichten"
 
-    form = AddEmployeeForm()
+    form = EmployeeForm()
 
     if form.validate_on_submit():
         _employee = Employee(
@@ -41,19 +56,39 @@ def add_employee():
 
         flash('Der Nutzer wurde erfolgreich angelegt. Das Login ist nun möglich.')
 
-    return render_template('secured/register.html', title=str(title_name + ' - ' + PageName), form=form)
+    return render_template('secured/employees/employee.html', title=str(title_name + ' - ' + Title), form=form)
 
 
-@employee.route('/list_employees')
+@employee.route('/employees/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
-def show_customer():
+def edit_employee(id):
     """
-    Display all registered employees in a list
+    Edit a Employee
     """
-    check_admin_role()
 
-    title_name = "Mitarbeiterliste"
+    Title = "Mitarbeiter bearbeiten"
+    add_employee = False
 
-    employees = Employee.query.all()
+    _employee = Employee.query.get_or_404(id)
+    form = EmployeeForm(obj=_employee)
+    if form.validate_on_submit():
+        _employee.email = form.email.data,
+        _employee.username = form.username.data,
+        _employee.first_name = form.first_name.data,
+        _employee.last_name = form.last_name.data,
+        _employee.full_name = str(form.first_name.data) + " " + str(form.last_name.data),
+        _employee.phone_number = form.phone_number.data,
+        db.session.commit()
+        flash('Mitarbeiter erfolgreich bearbeitet!')
 
-    return render_template('secured/list_employees.html', title=str(title_name + ' - ' + PageName), employee=employees)
+        # redirect to the departments page
+        return redirect(url_for('employee.list_employees'))
+
+    form.email.data = _employee.email
+    form.first_name.data = _employee.first_name
+    form.last_name.data = _employee.last_name
+    form.full_name.data = _employee.full_name
+    form.phone_number.data = _employee.phone_number
+    return render_template('secured/employees/employee.html', title=str(title_name + ' - ' + Title), action="Edit",
+                           add_employee=add_employee, form=form,
+                           customer=_employee)

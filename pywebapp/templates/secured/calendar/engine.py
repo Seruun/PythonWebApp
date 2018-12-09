@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from web.models import CalendarDates
+from ....models import DatesTable
 
 # Datum heute --> Defaul Anzeige beim öffnen des Kalenders!
 unf_date_today = datetime.now()
@@ -32,5 +32,5 @@ def get_DateID(datum):
 
 
 def get_Date(ID):
-    datum = CalendarDates.get(ID)
+    datum = DatesTable.get(ID)
     return datum
