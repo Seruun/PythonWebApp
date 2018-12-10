@@ -21,7 +21,8 @@
                             <thead>
                             <tr>
                                 <th width="10%"> Mitarbeiternummer</th>
-                                <th width="30%"> Name</th>
+                                <th width="30%"> Vorname</th>
+                                <th width="30%"> Nachname</th>
                                 <th width="30%"> Adresse</th>
                                 <th width="15%"> Bearbeiten</th>
                                 <th width="15%"> Löschen</th>
@@ -32,7 +33,7 @@
                                 <tr>
                                     <td> {{ employee.id }} </td>
                                     <td> {{ employee.first_name }} </td>
-                                    <td> {{ employee.lasst_name }} </td>
+                                    <td> {{ employee.last_name }} </td>
                                     <td> {{ employee.email }} </td>
                                     <td>
                                         <a href="{{ url_for('employee.edit_employee', id=employee.id) }}">
