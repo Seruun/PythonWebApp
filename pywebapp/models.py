@@ -1,5 +1,3 @@
-# Eligor_CMS/models.py
-
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -14,6 +12,7 @@ class Employee(UserMixin, db.Model):
     # Ensures table will be named in plural and not in singular
     # as is the name of the model
     __tablename__ = 'employees'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(60), index=True, unique=True)
@@ -25,6 +24,7 @@ class Employee(UserMixin, db.Model):
     department_id = db.Column(db.Integer, db.ForeignKey('departments.id'))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     is_admin = db.Column(db.Boolean, default=False)
+    dates = db.relationship('DatesTable', backref='employees', lazy='dynamic')
 
     @property
     def password(self):
@@ -68,6 +68,7 @@ class Department(db.Model):
     """
 
     __tablename__ = 'departments'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
@@ -76,7 +77,7 @@ class Department(db.Model):
                                 lazy='dynamic')
 
     def __repr__(self):
-        return '<Department: {}>'.format(self.name)
+        return 'Department: {}'.format(self.name)
 
 
 class Role(db.Model):
@@ -85,6 +86,7 @@ class Role(db.Model):
     """
 
     __tablename__ = 'roles'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
@@ -102,6 +104,7 @@ class Room(db.Model):
     """
 
     __tablename__ = 'rooms'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
@@ -113,10 +116,11 @@ class Room(db.Model):
 
 class Customer(db.Model):
     """
-    Create a DatesTable table
+    Create a Customer table
     """
 
     __tablename__ = 'customers'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(60), index=True, unique=True)
@@ -125,6 +129,7 @@ class Customer(db.Model):
     full_name = db.Column(db.String(121), index=True)
     address = db.Column(db.String(60), index=True)
     phone_number = db.Column(db.String(15), index=True)
+    dates = db.relationship('DatesTable', backref='customers', lazy='dynamic')
 
     def __repr__(self):
         return 'Kundennummer: {} \n Vorname: {} \n Nachname: {}'.format(self.id, self.first_name, self.last_name)
@@ -136,6 +141,7 @@ class DatesTable(db.Model):
     """
 
     __tablename__ = 'dates_table'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
 
@@ -149,7 +155,9 @@ class DatesTable(db.Model):
     customer = db.Column(db.String(121), index=True)
     room = db.Column(db.Integer, db.ForeignKey('rooms.id'))
     date_id = db.Column(db.Integer, db.ForeignKey('calendar_table.id'))
+    dates = db.relationship('CalendarTable', foreign_keys=[date_id])
     date = db.Column(db.String(10), db.ForeignKey('calendar_table.full_date'))
+    full_dates = db.relationship('CalendarTable', foreign_keys=[date])
 
     def __repr__(self):
         return 'Kundennummer: {} \n Kunde: {} \n Tattowierer: {} \n Datum: {} \n Raum: {} \n Uhrzeit (Beginn): {} \n Dauer: {}'.format(
@@ -162,6 +170,7 @@ class CalendarTable(db.Model):
     """
 
     __tablename__ = 'calendar_table'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
     full_date = db.Column(db.String(10), unique=True)
@@ -177,6 +186,7 @@ class TimeTable(db.Model):
     """
 
     __tablename__ = 'time_table'
+    __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
     full_time = db.Column(db.String(5), unique=True)
