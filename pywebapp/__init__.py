@@ -55,8 +55,8 @@ def create_app(config_name):
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
 
-    from .calendar import dates as dates_blueprint
-    app.register_blueprint(dates_blueprint)
+    from .calendar import calendar as calendar_blueprint
+    app.register_blueprint(calendar_blueprint)
 
     @app.context_processor
     def inject_now():

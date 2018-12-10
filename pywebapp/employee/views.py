@@ -4,8 +4,8 @@ from flask_login import current_user, login_required
 from . import employee
 from .forms import EmployeeForm
 from .. import db
-from ..models import Employee
 from ..globals import title_name
+from ..models import Employee
 
 
 def check_admin_role():
@@ -25,7 +25,8 @@ def list_employees():
 
     employees = Employee.query.all()
 
-    return render_template('secured/employees/employees.html', title=str(title_name + ' - ' + Title), employees=employees)
+    return render_template('secured/employees/employees.html', title=str(title_name + ' - ' + Title),
+                           employees=employees)
 
 
 @employee.route('/employees/add', methods=['GET', 'POST'])
@@ -37,6 +38,7 @@ def add_employee():
     check_admin_role()
 
     Title = "Mitarbeiterkonto einrichten"
+    add_employee = True
 
     form = EmployeeForm()
 
@@ -56,7 +58,8 @@ def add_employee():
 
         flash('Der Nutzer wurde erfolgreich angelegt. Das Login ist nun möglich.')
 
-    return render_template('secured/employees/employee.html', title=str(title_name + ' - ' + Title), form=form)
+    return render_template('secured/employees/employee.html', title=str(title_name + ' - ' + Title),
+                           add_employee=add_employee, form=form)
 
 
 @employee.route('/employees/edit/<int:id>', methods=['GET', 'POST'])

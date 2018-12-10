@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-dates = Blueprint('dates', __name__)
+calendar = Blueprint('calendar', __name__)
 
 from . import views

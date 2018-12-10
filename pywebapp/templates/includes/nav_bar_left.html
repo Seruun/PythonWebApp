@@ -84,17 +84,15 @@
                     <i class="fa fa-user fa-lg"></i> Instagram
                 </a>
             </li>
-            {% if current_user.is_anonymous %}
-                {% include 'includes/nav_login.html' %}
-            {% else %}
-                {% if current_user.role_id == 4 %}
-                    {% include 'includes/nav_logout_usr_gr3.html' %}
-                {% elif current_user.role_id == 3 %}
+            {% if current_user.is_authenticated %}
+                {% if current_user.role_id >= 3 %}
                     {% include 'includes/nav_logout_usr_gr3.html' %}
                 {% elif current_user.role_id == 2 %}
                     {% include 'includes/nav_logout_usr_gr2.html' %}
                 {% elif current_user.role_id == 1 %}
                     {% include 'includes/nav_logout_usr_gr1.html' %}
+                {% else %}
+                    {% include 'includes/nav_login.html' %}
                 {% endif %}
             {% endif %}
             <li>
@@ -107,7 +105,7 @@
                 {% if current_user.first_name == None %}
                     {{ current_user.username }}
                 {% else %}
-                    {{ current_user.first_name }}
+                    <p>{{ current_user.first_name }} {{ current_user.last_name }} </p>
                 {% endif %}
                 <br>
                 Benutzerrolle:

@@ -7,7 +7,7 @@ from wtforms.validators import DataRequired
 
 from wtforms_components import TimeField, DateRange
 
-from ..models import Customer, DatesTable, TimeTable, CalendarTable, Employee
+from ..models import Customer, DatesTable, TimeTable, CalendarTable, Employee, Room
 
 
 class NewDateForm(FlaskForm):
@@ -15,21 +15,22 @@ class NewDateForm(FlaskForm):
     Form fo new Date creation
     """
     # Customer
-    form_customer_id = QuerySelectField(query_factory=lambda: Customer.query.all(),
-                                  get_label='Kundennummer')
-    form_customer_first_name = StringField('Vorname', validators=[DataRequired()])
-    form_customer_last_name = StringField('Nachname', validators=[DataRequired()])
+    customer_id = QuerySelectField('Kunde', query_factory=lambda: Customer.query.all(),
+                                  get_label='id')
+    customer_first_name = StringField('Vorname', validators=[DataRequired()])
+    customer_last_name = StringField('Nachname', validators=[DataRequired()])
     # Employee
-    form_employee_id = QuerySelectField(query_factory=lambda: Employee.query.all(),
-                                  get_label='Mitarbeiternummer')
-    form_employee_first_name = StringField('Vorname', validators=[DataRequired()])
-    form_employee_last_name = StringField('Nachname', validators=[DataRequired()])
+    employee_id = QuerySelectField('Mitarbeiternummer', query_factory=lambda: Employee.query.all(),
+                                  get_label='id')
+    employee = QuerySelectField('Tätowierer/in', query_factory=lambda: Employee.query.all(),
+                                   get_label='full_name')
+    employee_first_name = StringField('Vorname', validators=[DataRequired()])
+    employee_last_name = StringField('Nachname', validators=[DataRequired()])
     # Date Planning
-    form_date = DateField('Datum', validators=[DataRequired()], format="%d.%m.%Y")
-    start_time = TimeField('Beginn', validators=[DataRequired(), DateRange(
-        min=time(8, 0, 0),
-        max=time(18, 0, 0)
-    )])
-    room_id = StringField('Raum', validators=[DataRequired()])
-    duration = StringField('Geplante Länge', validators=[DataRequired()])
+    date = DateField('Datum', validators=[DataRequired()], format="%d.%m.%Y")
+    start_time = QuerySelectField('Startzeit', query_factory=lambda: TimeTable.query.all(),
+                                  get_label='id')
+    room_id = QuerySelectField('Raum', query_factory=lambda: Room.query.all(),
+                                  get_label='id')
+    duration = StringField('Geplante Länge (in Minuten)', validators=[DataRequired()])
     submit = SubmitField('Termin anlegen')

@@ -1,0 +1,23 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="content-section">
+        <div class="outer">
+            <div class="middle">
+                <div class="inner">
+                    <div class="center">
+                        {% if add_date %}
+                            <h3>Termin erstellen</h3>
+                        {% else %}
+                            <h3>Termin bearbeiten</h3>
+                        {% endif %}
+                        <br/>
+                        {{ wtf.quick_form(form) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
