@@ -83,6 +83,7 @@ def create_app(config_name):
 
     @app.errorhandler(500)
     def internal_server_error(error):
+        db.session.rollback()
         return render_template('error_pages/500.html', title='Server Error'), 500
 
     return app

@@ -70,7 +70,7 @@ def edit_date(id):
 
     _date = DatesTable.query.get_or_404(id)
 
-    form = DateForm(obj=_date)
+    form = NewDateForm(obj=_date)
     if form.validate_on_submit():
             _date.id = form.date_id.data,
             _date.customer_id = form.customer_id.data,

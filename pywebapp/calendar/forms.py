@@ -24,8 +24,6 @@ class NewDateForm(FlaskForm):
                                   get_label='id')
     employee = QuerySelectField('Tätowierer/in', query_factory=lambda: Employee.query.all(),
                                    get_label='full_name')
-    employee_first_name = StringField('Vorname', validators=[DataRequired()])
-    employee_last_name = StringField('Nachname', validators=[DataRequired()])
     # Date Planning
     date = DateField('Datum', validators=[DataRequired()], format="%d.%m.%Y")
     start_time = QuerySelectField('Startzeit', query_factory=lambda: TimeTable.query.all(),
