@@ -34,15 +34,14 @@ def add_date():
     form = NewDateForm()
     if form.validate_on_submit():
         new_date_plan = DatesTable(
-            date=form.form_date.data,
-            customer_id=form.form_customer_id.data,
-            customer=str(form.form_customer_first_name.data) + " " + str(form.form_customer_last_name.data),
-            employee_id=form.form_employee_id.data,
-            employee=str(form.form_employee_first_name.data) + " " + str(form.form_employee_last_name.data),
+            date=form.date.data,
+            customer_id=form.customer_id.data,
+            customer=str(form.customer_first_name.data) + " " + str(form.customer_last_name.data),
+            employee_id=form.employee_id.data,
+            employee=form.employee.data,
             room=form.room_id.data,
             start_time=form.start_time.data,
-            duration=form.duration.data,
-            end_time=form.start_time.data + form.duration.data
+            duration=form.duration.data
 
         )
 
@@ -76,11 +75,10 @@ def edit_date(id):
             _date.customer_id = form.customer_id.data,
             _date.customer = str(form.customer_first_name.data) + " " + str(form.customer_last_name.data),
             _date.employee_id = form.employee_id.data,
-            _date.employee = str(form.employee_first_name.data) + " " + str(form.employee_last_name.data),
+            _date.employee = form.employee.data,
             _date.room = form.room_id.data,
             _date.start_time = form.start_time.data,
-            _date.duration = form.duration.data,
-            _date.end_time = form.start_time.data + form.duration.data
+            _date.duration = form.duration.data
             db.session.commit()
 
             flash("Termin erfolgreich bearbeitet!")
@@ -95,7 +93,6 @@ def edit_date(id):
     form.room_id.data = _date.room
     form.start_time.data = _date.start_time
     form.duration.data = _date.duration
-    form.end_time = _date.end_time
 
     return render_template('secured/calendar/dates.html', title=str(title_name + ' - ' + Title), action="Edit",
                            add_date=add_date, form=form,

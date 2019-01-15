@@ -27,7 +27,7 @@ class NewDateForm(FlaskForm):
     # Date Planning
     date = DateField('Datum', validators=[DataRequired()], format="%d.%m.%Y")
     start_time = QuerySelectField('Startzeit', query_factory=lambda: TimeTable.query.all(),
-                                  get_label='id')
+                                  get_label='full_time')
     room_id = QuerySelectField('Raum', query_factory=lambda: Room.query.all(),
                                   get_label='id')
     duration = StringField('Geplante Länge (in Minuten)', validators=[DataRequired()])

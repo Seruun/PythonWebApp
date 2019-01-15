@@ -147,7 +147,6 @@ class DatesTable(db.Model):
 
     start_time = db.Column(db.Integer, index=True)
     duration = db.Column(db.Integer, index=True)
-    end_time = db.Column(db.Integer, index=True)
 
     employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
     employee = db.Column(db.String(121), index=True)
